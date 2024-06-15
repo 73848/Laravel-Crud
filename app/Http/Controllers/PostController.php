@@ -7,21 +7,28 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function showPost(Post $post){
-        if(auth()->check()){
-            return view('edit',  ['post' => $post] );
+        if(auth()->user()->id !== $post['user_id']){ // verifica  se o usuário cadastrado é o mesmo que é o dono do post a ser editado
+            return view('/home');
         }
+        return view('edit',  ['post' => $post] );
+
     }
-    public function editPost(Request $request){
-        if(auth()->check()){
-            $inputForm = $request->validate([
-                'title'=> 'required',
-                'body'=>['required','max:1000'],
-            ]);
-            $inputForm['title'] = $request->title;
-            $inputForm['body'] = $request->body;
-            $inputForm->save();
+    public function editPost(Post $post, Request $request){
+        if(auth()->user()->id !== $post['user_id']){ 
+            // verifica  se o usuário cadastrado é o mesmo que é o dono do post a ser editado
             return redirect('/home');
-        }
+        } 
+        $inputForm = $request->validate([
+            'title'=> 'required',
+            'body'=>['required','max:1000'],
+        ]);
+
+        $post['title'] = $inputForm['title'];
+        $post['body'] = $inputForm['body'];
+
+        $post->update($inputForm);
+        return redirect('/home');
+    
     }
 
     // function that will handle the post 

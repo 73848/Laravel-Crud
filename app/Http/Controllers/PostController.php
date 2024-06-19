@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function deletePost(Post $post) {
+           $post->delete();
+           return redirect('/home');
+        
+    }
     public function showPost(Post $post){
         if(auth()->user()->id !== $post['user_id']){ // verifica  se o usuário cadastrado é o mesmo que é o dono do post a ser editado
             return view('/home');
         }
         return view('edit',  ['post' => $post] );
-
     }
     public function editPost(Post $post, Request $request){
         if(auth()->user()->id !== $post['user_id']){ 
@@ -28,9 +32,7 @@ class PostController extends Controller
 
         $post->update($inputForm);
         return redirect('/home');
-    
     }
-
     // function that will handle the post 
     public function createPostBlog(Request $request){
         $inputForm = $request->validate([

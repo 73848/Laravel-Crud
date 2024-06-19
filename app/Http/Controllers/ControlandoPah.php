@@ -28,16 +28,17 @@ class ControlandoPah extends Controller
         }
         return redirect('/home');
     }
+         // função para realizar cadastro de novos usuários
     public function register(Request $request){
-        //validando input de forms
+            //validando input de forms
         $validating = $request->validate([
             'name'=>['required', 'min:3', 'max:35', Rule::unique('users', 'name')],
             'email'=>['required','email', Rule::unique('users', 'email')],  
             'password'=>['required','min:8']
         ]);
-/*
-    criando usuario e encriptando sua senha 
-*/
+            /*
+                criando usuario e encriptando sua senha 
+            */
         $validating['password'] = bcrypt($validating['password']);
         $user = User::create($validating);
         auth()->login($user);

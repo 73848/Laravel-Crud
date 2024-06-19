@@ -36,3 +36,4 @@ Route::post('/login', [ControlandoPah::class, 'login']);
 Route::post('/create-post', [PostController::class, 'createPostBlog']);
 Route::get('/edit/{post}', [PostController::class, 'showPost']);
 Route::put('/edit/{post}', [PostController::class, 'editPost']);
+Route::delete('/delete/{post}', [PostController::class, 'deletePost']);

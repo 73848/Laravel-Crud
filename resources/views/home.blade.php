@@ -30,7 +30,7 @@
             <form action="/delete/{{$post->id}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button>Delete</button>
+                <button >Delete the post {{$post->id}}</button>
             </form>
         </div>
     @endforeach

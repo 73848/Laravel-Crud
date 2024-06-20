@@ -1,19 +1,19 @@
 ## Requisitos:
--PHP > -v 8;
--Composer;
+- PHP > -v 8
+- Composer
 
 ## Como Rodar o projeto baixado: 
--Instalar o gerenciador de dependências composer: 
+- Instalar o gerenciador de dependências composer: 
 
 ```
 composer install
 ```
 
-Configurar o banco de dados; 
+Configure o banco de dados; 
 
-Duplicar o arquivo '.env.example' e renomear para '.env';
+Duplique o arquivo '.env.example' e renomear para '.env';
 
-Execultar o comando: 
+Execulte o comando 
 
 ```
 php artisan migrate
@@ -23,6 +23,7 @@ para criar as tabelas no banco de dados cadastrado.
 ## Rodando o projeto 
 
 - Inicie o banco de dados - nesse caso é o mysql - e rode o comando
+  
   ```
   php artisan serve
   ```
